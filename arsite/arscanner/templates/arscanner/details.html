@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{arobj.title}}</h1>
+    <p>{{arobj.description}}</p>
+    <a href="{% url 'arscanner:scanning' arobj.id %}">Scanning!</a>
+</body>
+</html>

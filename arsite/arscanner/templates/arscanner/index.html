@@ -1,0 +1,7 @@
+{% if latest_list %}
+    <ul>
+        {% for arobj in latest_list %}
+            <li><a href="{% url 'arscanner:details' arobj.id %}">{{ arobj.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
