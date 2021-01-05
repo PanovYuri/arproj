@@ -1,0 +1,22 @@
+.maincontent {
+    display: grid;
+    grid-template:
+        "head"
+        "main"
+        "foot";
+    grid-template-rows: max-content 1fr max-content;
+    min-height: 100vh;
+}
+
+header {
+    grid-area: head;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: foot;
+}
+

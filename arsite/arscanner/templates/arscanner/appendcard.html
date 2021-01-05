@@ -1,0 +1,32 @@
+{% extends "arscanner/base.html" %}
+
+{% block title %}Добавление объекта{% endblock title %}
+
+{% block content %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'arscanner:appendcard' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="field">
+                <label class="label">{{field.label_tag}}</label>
+                <div class="control">
+                {{field}}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="file is-boxed">
+            <label class="file-label">
+              {{ fileForm }}
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Выбрать файл…
+                </span>
+              </span>
+            </label>
+          </div>
+          <input type="submit">
+    </form>
+{% endblock content %}

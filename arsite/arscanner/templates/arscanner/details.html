@@ -8,6 +8,6 @@
 <body>
     <h1>{{arobj.title}}</h1>
     <p>{{arobj.description}}</p>
-    <a href="{% url 'arscanner:scanning' arobj.id %}">Scanning!</a>
+    <a href="{% url 'arscanner:scanning' arobj.unique_id %}">Scanning!</a>
 </body>
 </html>

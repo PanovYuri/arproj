@@ -1,7 +1,47 @@
-{% if latest_list %}
-    <ul>
+{% extends "arscanner/base.html" %}
+
+{% block title %}Список проектов{% endblock title %}
+
+{% block content %}
+    <div class="level">
+        <div class="level-left spaced-block">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Find a repository">
+                </div>
+                <div class="control">
+                    <a class="button is-info" href="{% url 'arscanner:appendcard' %}">
+                        Search
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="level-rigth">
+            <a class="button is-primary" href="{% url 'arscanner:appendcard' %}">
+                Добавить
+            </a>
+        </div>
+    </div>
+    {% if latest_list %}
         {% for arobj in latest_list %}
-            <li><a href="{% url 'arscanner:details' arobj.id %}">{{ arobj.title }}</a></li>
+        <div class="box">
+            <div class="level">
+                <div class="level-left spaced-block">
+                    <div class="content">
+                        <p class="title is-4">{{ arobj.title }}</p>
+                        <p class="subtitle is-6">Видео проект</p>
+                    </div>
+                </div>
+                <div class="level-rigth">
+                    <div class="buttons">
+                        <a class="button is-link" href="{% url 'arscanner:scanning' arobj.unique_id %}">Сканер</a>
+                        <a class="button is-info is-outlined" href="{% url 'arscanner:details' arobj.unique_id %}">Описание</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         {% endfor %}
-    </ul>
-{% endif %}
+    {% endif %}
+{% endblock content %}
+
