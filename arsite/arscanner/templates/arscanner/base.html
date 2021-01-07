@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>{% block title %}{% endblock title %}</title>
@@ -15,7 +16,7 @@
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="https://bulma.io">
-                          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                          <img src="{% static 'logo.png' %}" width="112" height="28">
                         </a>
                     
                         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
