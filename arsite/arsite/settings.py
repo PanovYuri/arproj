@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = '/var/www/u1256781/data/www/arcard.site/static/'
+STATIC_ROOT = '/var/www/u1256781/data/www/arcard.site/arproj/static/'
 STATIC_URL = '/static/'
 if DEBUG:
     STATICFILES_DIRS = [
