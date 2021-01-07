@@ -1,51 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Panov Lab</title>
-</head>
-<body style="margin : 0px; overflow: hidden;">
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <a-scene embedded arjs="trackingMethod: best;" allowfullscreen="true" >
+<!doctype html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+        {% load static %}
+        <script>
+            AFRAME.registerComponent('videohandler', {
+                init: function () {
+                    var marker = this.el;
+                    this.vid = document.querySelector("#vid");
 
-		<a-assets>
-			<video src="{{media.media.url}}" id="vid" preload="auto" loop crossorigin="anonymous"></video>
-		</a-assets>
-
-		<a-marker preset="hiro" vidhandler>
-			<!-- <a-entity
-				position="0 0 0"
-				scale="0.005 0.005 0.005"
-				rotation="-90 180 180"
-				gltf-model="obj/scene.gltf"
-			></a-entity> -->
-			<a-plane position='0 0 0' scale="2 2 2" width="2" rotation="-90 0 0" 
-			material='transparent:true; src:#vid'></a-plane>
-		</a-marker>
-		<!-- <a-entity camera></a-entity> -->
-		<a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
-	</a-scene>
-    <script>
-        AFRAME.registerComponent('vidhandler', {
-            init: function () {
-                this.toggle = false;
-                this.vid = document.querySelector("#vid")
-                this.vid.pause()
-            },
-            tick: function () {
-                if (this.el.object3D.visible == true) {
-                    if (!this.toggle) {
+                    marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
-                    }
-                } else {
-                    this.toggle = false;
-                    this.vid.pause();
-                }
-            }
-        });
-    </script>
-</body>
+                    }.bind(this));
+
+                    marker.addEventListener('markerLost', function () {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }.bind(this));
+                },
+            });
+        </script>
+    </head>
+
+    <body style="margin: 0; overflow: hidden;">
+        <a-scene
+            vr-mode-ui="enabled: false"
+            loading-screen="enabled: false;"
+            arjs='sourceType: webcam; debugUIEnabled: false;'
+            id="scene"
+            embedded
+            gesture-detector
+        >
+            <a-assets>
+                <video
+                    id="vid"
+                    src="{{media.media.url}}"
+                    preload="auto"
+                    response-type="arraybuffer"
+                    loop
+                    crossorigin
+                    webkit-playsinline
+                    autoplay
+                    muted
+                    playsinline
+                ></video>
+            </a-assets>
+
+            <a-marker
+                type="pattern"
+                preset="custom"
+                url="{% static marker.patt %}"
+                videohandler
+                smooth="true"
+                smoothCount="10"
+                smoothTolerance="0.01"
+                smoothThreshold="5"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-video
+                    src="#vid"
+                    scale="1 1 1"
+                    position="0 0.1 0"
+                    rotation="-90 0 0"
+                    class="clickable"
+                    gesture-handler
+                    width="2"
+                ></a-video>
+            </a-marker>
+
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
 </html>

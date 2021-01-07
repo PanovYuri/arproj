@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '-(y2mk_%9lkcfm(*#sufzf$fht#qxkr10)hvu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['arcard.site', 'www.arcard.site']
 
 
 # Application definition
@@ -77,8 +77,11 @@ WSGI_APPLICATION = 'arsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u1256781_default',
+        'USER': 'u1256781_default',
+        'PASSWORD': 'OsShQ0S_',
+        'HOST': 'localhost'
     }
 }
 
@@ -121,8 +124,9 @@ USE_TZ = True
 
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+if DEBUG:
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = '/media/'
