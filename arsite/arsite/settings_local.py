@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '-(y2mk_%9lkcfm(*#sufzf$fht#qxkr10)hvu8q=#izwj(nu5r')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['arcard.site', 'www.arcard.site']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'arsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u1256781_default',
-        'USER': 'u1256781_default',
-        'PASSWORD': 'OsShQ0S_',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -122,16 +119,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = '/var/www/u1256781/data/www/arcard.site/static/'
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
-if DEBUG:
-    STATICFILES_DIRS = [
+STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static')
     ]
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = '/media/'
-
-try:
-    from .settings_local import *
-except ImportError as e:
-    pass
