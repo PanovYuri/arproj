@@ -2,9 +2,19 @@ from django.db import models
 import uuid
 
 # Create your models here.
+class MediaType(models.Model):
+    title = models.CharField(max_length=8)
+
+    def __str__(self):
+        return self.title
+
 class Media(models.Model):
     title = models.CharField(max_length=200)
     media = models.FileField(upload_to='ar_media/', null=True, verbose_name="")
+    media_type = models.ForeignKey(MediaType, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.title
 
 class ArObj(models.Model):
     media = models.ForeignKey(Media, on_delete=models.SET_NULL, null=True)

@@ -20,3 +20,21 @@ footer {
     grid-area: foot;
 }
 
+#filter-tags .tag:hover {
+    cursor: pointer;
+}
+
+form .image {
+    margin-top: 10px;
+}
+
+.image.is-256x256 {
+    width: 256px;
+    height: 256px;
+}
+
+#list_projects .subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
